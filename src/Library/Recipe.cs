@@ -16,12 +16,21 @@ namespace Full_GRASP_And_SOLID
 
         public Product FinalProduct { get; set; }
 
+        private TimeControler timeControler;
+        private CountdownTimer cdownTimer;
+        public Recipe()
+        {
+            this.timeControler= new TimeControler(this);
+            this.cdownTimer= new CountdownTimer();
+        }
+
         // Agregado por Creator
         public void AddStep(Product input, double quantity, Equipment equipment, int time)
         {
             Step step = new Step(input, quantity, equipment, time);
             this.steps.Add(step);
         }
+        private bool Cooked = false;
 
         // Agregado por OCP y Creator
         public void AddStep(string description, int time)
@@ -61,6 +70,29 @@ namespace Full_GRASP_And_SOLID
             }
 
             return result;
+        }
+//agrego el método que me permita sencillamente recuperar el tiempo de cada step.
+
+        public int GetCookTime()
+        {
+            int Time = 0;
+            foreach (BaseStep step in this.steps)
+            {
+                Time = Time + step.Time;
+            }
+            return Time;
+        }
+        public void setCook()
+        {
+            this.Cooked=true;
+        }
+
+        public void Cook()
+        {
+            cdownTimer.Register(GetCookTime(),  timeControler);
+            
+        
+            
         }
     }
 }

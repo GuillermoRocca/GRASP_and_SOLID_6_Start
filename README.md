@@ -25,3 +25,5 @@ La clase ```Thread``` está definida en el espacio de nombres ```System.Threadin
 
 
 ️➡️ **Que patrón(es) o principio(s) has usado para esto?**
+
+Inicialmente mi idea para GetCookTime era utilizar el patron visitor y que entre a cada paso step, de esa forma ir recuperando paso por paso el tiempo de cada uno. Algo similar a lo que se hizo en el ejercicio tree 
